@@ -31,7 +31,7 @@ namespace SiftScienceNet.Events
         public string Description { get; set; }
 
         [JsonProperty("$time")]
-        public int? Time { get; set; }
+        public long? Time { get; set; }
     }
 
     [JsonConverter(typeof(OrderStatusConverter))]

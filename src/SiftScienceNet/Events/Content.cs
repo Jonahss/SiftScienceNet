@@ -52,7 +52,7 @@ namespace SiftScienceNet.Events
         public ContentStatus? Status { get; set; }
 
         [JsonProperty("$time")]
-        public int? Time { get; set; }
+        public long? Time { get; set; }
     }
 
     [JsonConverter(typeof(ContentStatusConverter))]

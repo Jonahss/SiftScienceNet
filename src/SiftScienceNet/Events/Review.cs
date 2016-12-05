@@ -26,6 +26,6 @@ namespace SiftScienceNet.Events
         public Status SubmissionStatus { get; set; }
 
         [JsonProperty("$time")]
-        public int? Time { get; set; }
+        public long? Time { get; set; }
     }
 }

@@ -32,7 +32,7 @@ namespace SiftScienceNet
         Task<ResponseStatus> Login(string userId, string sessionId, bool success, bool returnScore = false);
         Task<ResponseStatus> Logout(string userId, bool returnScore = false);
         Task<ResponseStatus> LinkSessionToUser(string userId, string sessionId, bool returnScore = false);
-        Task<ResponseStatus> Label(string userId, bool isBad, AbuseType abuseType, string description = "", string analyst = "", string source = "");
+        Task<ResponseStatus> Label(string userId, bool isBad, AbuseType abuseType, string description = "", string analyst = "", string source = "", long? time = null);
         Task<ScoreResponse> GetSiftScore(string userId);
     }
 
@@ -301,7 +301,7 @@ namespace SiftScienceNet
 
         #region Labels
 
-        public async Task<ResponseStatus> Label(string userId, bool isBad, AbuseType abuseType, string description = "", string analyst = "", string source = "")
+        public async Task<ResponseStatus> Label(string userId, bool isBad, AbuseType abuseType, string description = "", string analyst = "", string source = "", long? time = null)
         {
             var baseObject = new ExpandoObject() as IDictionary<string, Object>;
             baseObject.Add("$abuse_type", abuseType);
@@ -322,6 +322,11 @@ namespace SiftScienceNet
             if (!String.IsNullOrEmpty(description))
             {
                 baseObject.Add("$description", description);
+            }
+
+            if (time != null)
+            {
+                baseObject.Add("$time", time);
             }
 
             var json = JsonConvert.SerializeObject(baseObject, Formatting.None, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
